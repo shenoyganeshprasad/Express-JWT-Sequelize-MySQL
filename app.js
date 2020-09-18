@@ -16,12 +16,17 @@ const sequelize = require("./config/database");
 
 const conn = require("./controller/db_test.controller");
 
+// Router
+const userRoute = require("./routes/user.routes");
+
 // Add basic route
 app.get("/", conn, (req, res) => {
   res.status(200).json({
     message: "Express is up",
   });
 });
+
+app.use("/api", userRoute);
 
 // Start the app
 app.listen(process.env.PORT, () => {
