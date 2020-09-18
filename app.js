@@ -11,29 +11,10 @@ app.use(bodyParser.json());
 // dotenv
 require("dotenv").config();
 
-// Sequelize
-const { Sequelize } = require("sequelize");
+// Database Config
+const sequelize = require("./config/database");
 
-// Initialize Sequelize
-const sequelize = new Sequelize({
-  host: process.env.HOST,
-  database: process.env.DATABASE,
-  username: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  dialect: "mysql",
-});
-
-// Test the Connection
-const conn = async (req, res, next) => {
-  try {
-    await sequelize.authenticate();
-    console.log("Connection has been established successfully.");
-  } catch (error) {
-    console.error("Unable to connect to the database:", error);
-  } finally {
-    next();
-  }
-};
+const conn = require("./controller/db_test.controller");
 
 // Add basic route
 app.get("/", conn, (req, res) => {
