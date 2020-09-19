@@ -13,6 +13,6 @@ exports.authenticateToken = (req, res, next) => {
   });
 };
 
-exports.generateAccessToken = (username) => {
-  return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: "1800s" });
+exports.generateAccessToken = (email) => {
+  return jwt.sign(email, process.env.TOKEN_SECRET, { expiresIn: "1800s" });
 };

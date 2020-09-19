@@ -3,7 +3,7 @@ const sequelize = require("../config/database");
 
 // Create a user model
 const User = sequelize.define("user", {
-  name: {
+  email: {
     type: DataTypes.STRING,
   },
   password: {

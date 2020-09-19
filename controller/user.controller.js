@@ -12,14 +12,14 @@ exports.getAllUsers = async (req, res) => {
 
 // Create User
 exports.createUser = async (req, res) => {
-  const { name, password } = req.body;
+  const { email, password } = req.body;
   // Encrypt password
   const hash = crypto
     .createHmac("sha256", process.env.SECRET)
     .update(password)
     .digest("hex");
-  const userCreated = await User.create({ name: name, password: hash });
-  const token = generateAccessToken({ username: name });
+  const userCreated = await User.create({ email: email, password: hash });
+  const token = generateAccessToken({ email: email });
   res.json({
     userCreated,
     token: token,
