@@ -18,3 +18,13 @@ exports.createUser = async (req, res) => {
   const userCreated = await User.create({ name: name, password: hash });
   res.json({ userCreated, message: "Account Created Successfully" });
 };
+
+// Get Single User
+exports.getUser = async (req, res) => {
+  const userId = req.params.id;
+  const user = await User.findOne({ where: { id: userId } });
+  if (!user) {
+    res.json({ message: "User Not Found" });
+  }
+  res.json({ user, message: "User Found" });
+};
