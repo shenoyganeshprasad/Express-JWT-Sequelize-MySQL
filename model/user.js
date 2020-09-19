@@ -3,6 +3,12 @@ const sequelize = require("../config/database");
 
 // Create a user model
 const User = sequelize.define("user", {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: Sequelize.UUIDV4,
+    primaryKey: true,
+    allowNull: false,
+  },
   email: {
     type: DataTypes.STRING,
   },
