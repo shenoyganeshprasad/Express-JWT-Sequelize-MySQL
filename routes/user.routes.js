@@ -9,16 +9,19 @@ const {
   deleteUser,
 } = require("../controller/user.controller");
 
+// Services
+const { authenticateToken } = require("../services/auth.service");
+
 // Get All Users
-router.get("/users", getAllUsers);
+router.get("/users", authenticateToken, getAllUsers);
 
 // Create Users
 router.post("/users", createUser);
 
 // Get Single User
-router.get("/users/:id", getUser);
+router.get("/users/:id", authenticateToken, getUser);
 
 // Delete User
-router.delete("/users/:id", deleteUser);
+router.delete("/users/:id", authenticateToken, deleteUser);
 
 module.exports = router;

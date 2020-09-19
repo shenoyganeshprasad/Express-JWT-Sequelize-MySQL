@@ -1,6 +1,9 @@
 const User = require("../model/user");
 const crypto = require("crypto");
 
+// Services
+const { generateAccessToken } = require("../services/auth.service");
+
 // Get all Users
 exports.getAllUsers = async (req, res) => {
   const users = await User.findAll();
@@ -16,7 +19,12 @@ exports.createUser = async (req, res) => {
     .update(password)
     .digest("hex");
   const userCreated = await User.create({ name: name, password: hash });
-  res.json({ userCreated, message: "Account Created Successfully" });
+  const token = generateAccessToken({ username: name });
+  res.json({
+    userCreated,
+    token: token,
+    message: "Account Created Successfully",
+  });
 };
 
 // Get Single User
