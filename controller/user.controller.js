@@ -28,3 +28,14 @@ exports.getUser = async (req, res) => {
   }
   res.json({ user, message: "User Found" });
 };
+
+// Delete User
+exports.deleteUser = async (req, res) => {
+  const userId = req.params.id;
+  const user = await User.destroy({ where: { id: userId } });
+  if (!user) {
+    res.json({ message: "User Not Found in the database" });
+  } else {
+    res.json({ user, message: "User Deleted" });
+  }
+};
